@@ -1,6 +1,6 @@
 # _XQEL_
 
-Excel template + SQL.
+EX + sQL : Easy excel export. 
 
 ## Goals
 
@@ -9,8 +9,8 @@ Excel template + SQL.
 
 ## Development goals
 
-* Usermodel, SAXModel
-* SQL or iBatis, JPA...
+* POI [Usermodel]()
+* Provides multiple ways to connect and query database. 
 * Accumulative Models
 * Pivots
 
@@ -24,6 +24,4 @@ Excel template + SQL.
 
 ## Dependencies
 
-* Java 8
 * Apache POI
-
