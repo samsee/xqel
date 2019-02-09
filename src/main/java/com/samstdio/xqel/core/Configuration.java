@@ -7,6 +7,16 @@ import java.util.Properties;
 class Configuration {
     final private Properties props;
 
+    private enum PROPS {
+        DBDRIVER
+        , DBCONNECTION
+        , DBSCHEME
+        , DBUSER
+        , DBPASS
+        , TEMPLATE_DIR
+        , OUTPUT_DIR
+    }
+
     static Configuration loadFromConfigFile(String filename) throws IOException {
         return new Configuration(filename);
     }
@@ -20,5 +30,19 @@ class Configuration {
 
     String getProperty(String key) {
         return props.getProperty(key);
+    }
+
+    /**
+     *
+     * @param conf
+     * @return true if valid
+     */
+    static boolean validate(Configuration conf) {
+        for (PROPS p : PROPS.values()) {
+            if (null == conf.props.getProperty(p.toString()))
+                return false;
+        }
+
+        return true;
     }
 }

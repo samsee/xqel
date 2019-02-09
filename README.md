@@ -1,17 +1,15 @@
 # _XQEL_
 
-EX + sQL : Easy excel export. 
+EXcel + sQL : SQL과 엑셀 템플릿으로 엑셀 보고서 만들기
 
 ## Goals
 
 * Provides a easy way for making SQL result to excel file.
-  * 
 
 ## Development goals
 
-* POI [Usermodel]()
 * Provides multiple ways to connect and query database. 
-* Accumulative Models
+* Accumulative Models.
 * Pivots
 
 ## Ideas
@@ -19,9 +17,15 @@ EX + sQL : Easy excel export.
 * Excel
   * Named Cell
   * Placeholder
-* Excel API(POI)
+* Apache POI [Usermodel](https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/package-summary.html)
   * Why?
 
 ## Dependencies
 
 * Apache POI
+
+## Alternatives
+
+
+
+* 

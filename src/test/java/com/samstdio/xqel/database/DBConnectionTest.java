@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 
-public class DatabaseTest {
+public class DBConnectionTest {
 
     @Test
     public void testDBConnection() throws XQELDBException {
