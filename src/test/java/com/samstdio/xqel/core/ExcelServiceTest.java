@@ -1,5 +1,7 @@
 package com.samstdio.xqel.core;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -7,7 +9,7 @@ import java.io.File;
 import static org.junit.Assert.*;
 
 public class ExcelServiceTest {
-
+    final static String test_file = "sample.xlsx";
     @Test
     public void testCreate() {
         System.out.println(File.separator);
@@ -15,9 +17,17 @@ public class ExcelServiceTest {
         ExcelService testee = ExcelService.createExcel(test_file );
         testee.save();
 
-        File output_file = new File(test_file);
-        assertTrue("File exists", output_file.exists());
-        output_file.delete();
+        testee.writeValueAt("World", 1, 2);
+        Cell cell = testee.getCell(1, 2);
+        assertEquals("World", cell.getStringCellValue());
+
+
+        testee.save();
+
+//        cell.getBooleanCellValue();
+//        cell.getDateCellValue();
+//        cell.getNumericCellValue();
+//        cell.getRichStringCellValue();
     }
 
 }

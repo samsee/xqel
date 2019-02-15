@@ -80,8 +80,21 @@ class ExcelService {
      *
      * @param worksheetName
      */
-    void selectWorksheet(String worksheetName) {
+    boolean selectWorksheet(String worksheetName) {
         workingsheet = wb.getSheet(worksheetName);
+        if (null == workingsheet)
+            return false;
+        return true;
+    }
+
+    boolean createSheet(String sheetName) {
+        workingsheet = wb.getSheet(sheetName);
+        if (null == workingsheet) {
+            workingsheet = wb.createSheet(sheetName);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -260,7 +273,7 @@ class ExcelService {
      * @param row_to_write 행
      * @param col_to_write 열
      */
-    private void writeValueAt(Object value, int row_to_write, int col_to_write) {
+    void writeValueAt(Object value, int row_to_write, int col_to_write) {
         Row row = workingsheet.getRow(row_to_write);
         if (null == row)
             row = workingsheet.createRow(row_to_write);
@@ -298,7 +311,8 @@ class ExcelService {
         destCell.setCellStyle(srcCell.getCellStyle());
     }
 
-    private Cell getCell(int row_i, int col_i) {
+    //private
+    Cell getCell(int row_i, int col_i) {
         Row row = workingsheet.getRow(row_i);
         if (null == row)
             row = workingsheet.createRow(row_i);
