@@ -5,6 +5,7 @@ import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -274,23 +276,23 @@ class ExcelService {
      * @param col_to_write 열
      */
     void writeValueAt(Object value, int row_to_write, int col_to_write) {
-        Row row = workingsheet.getRow(row_to_write);
-        if (null == row)
-            row = workingsheet.createRow(row_to_write);
-
-        Cell cell = row.getCell(col_to_write);
-        if (null == cell)
-            cell = row.createCell(col_to_write);
+        Cell cell = getCell(row_to_write, col_to_write);
 
         if (null == value)
             cell.setCellValue("");
         // FIXME 형(Type) 쫌....문제야 문제... writeResultToRegion 이 메서드도..
-        if (value instanceof String)
-            cell.setCellValue((String) value);
+        if (value instanceof Calendar)
+            cell.setCellValue((Calendar) value);
+        else if (value instanceof Boolean)
+            cell.setCellValue((Boolean) value);
         else if (value instanceof Date)
             cell.setCellValue((Date) value);
         else if (value instanceof BigDecimal)
             cell.setCellValue(((BigDecimal) value).doubleValue());
+        else if (value instanceof XSSFRichTextString)
+            cell.setCellValue((XSSFRichTextString) value);
+        else
+            cell.setCellValue(value.toString());
     }
 
     void fomularUpdate() {
